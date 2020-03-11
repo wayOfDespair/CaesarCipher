@@ -6,7 +6,7 @@ public class MainLogic {
         char[] text = str.toUpperCase().toCharArray();
         for (int i = 0; i < text.length; i++) {
             if (text[i] != ' ') {
-                if (text[i] < 91 - shift) {
+                if (text[i] < 91 - shift && text[i] != ' ') {
                     text[i] += shift;
                 } else {
                     text[i] = (char) (text[i] - 25 + shift - 1);
