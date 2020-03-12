@@ -11,11 +11,14 @@ public class MainWindow extends JFrame {
 
     public MainWindow() throws HeadlessException {
         super("Caesar cipher");
+        int WINDOW_WIDTH = 550;
+        int WINDOW_HEIGHT = 300;
         setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
+        setDefaultLookAndFeelDecorated(true);
         setOriginalText();
         setMorphedText();
         setShift();
@@ -34,8 +37,6 @@ public class MainWindow extends JFrame {
     private JButton encryptButton        = new JButton("Encrypt");
     private JButton decryptButton        = new JButton("Decrypt");
 
-    private final int WINDOW_WIDTH    = 550;
-    private final int WINDOW_HEIGHT   = 300;
     private final int LABEL_WIDTH     = 90;
     private final int TEXTFIELD_WIDTH = 400;
     private final int BUTTON_WIDTH    = 165;
@@ -96,13 +97,8 @@ public class MainWindow extends JFrame {
         encryptButton.setBounds(new Rectangle(160, 50, BUTTON_WIDTH, 30));
         encryptButton.addActionListener(actionEvent -> {
             originalTextField.setText(originalTextField.getText().toUpperCase());
-            if (MainLogic.isNumeric(String.valueOf(shift.getSelectedItem()))) {
-                morphedTextField.setText(MainLogic.encryptText(originalTextField.getText(), Integer.parseInt(String.valueOf(shift.getSelectedItem()))));
-                morphedTextLabel.setText("Encrypted text");
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Enter integer in shift field");
-            }
+            morphedTextField.setText(MainLogic.encryptText(originalTextField.getText(), shift.getSelectedIndex()));
+            morphedTextLabel.setText("Encrypted text");
         });
         add(encryptButton);
     }
@@ -111,13 +107,8 @@ public class MainWindow extends JFrame {
         decryptButton.setBounds(new Rectangle(335, 50, BUTTON_WIDTH, 30));
         decryptButton.addActionListener(actionEvent -> {
             originalTextField.setText(originalTextField.getText().toUpperCase());
-            if (MainLogic.isNumeric(String.valueOf(shift.getSelectedItem()))) {
-                morphedTextField.setText(MainLogic.decryptText(originalTextField.getText(), Integer.parseInt(String.valueOf(shift.getSelectedItem()))));
-                morphedTextLabel.setText("Decrypted text");
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Enter integer in shift field");
-            }
+            morphedTextField.setText(MainLogic.decryptText(originalTextField.getText(), shift.getSelectedIndex()));
+            morphedTextLabel.setText("Decrypted text");
         });
         add(decryptButton);
     }
